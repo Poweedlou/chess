@@ -1,11 +1,7 @@
 #ifndef ARRAY2D_H
 #define ARRAY2D_H
 
-#include "types.h"
-
-#ifndef NDEBUG
-#include <iostream>
-#endif
+#include "debug.hpp"
 
 
 template <class T, class T_ind, T_ind x_len, T_ind y_len>

@@ -7,7 +7,8 @@ enum class MoveError {
     YOUR_PIECE_IN_DEST,
     NO_PIECE_IN_SRC,
     CHECK,
-    TRAVEL_ERROR
+    TRAVEL_ERROR,
+    NO_DOUBLE_MOVE
 };
 
 #endif
