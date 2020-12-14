@@ -25,9 +25,11 @@ public:
                 m_isWhite(isWhite),
                 m_callback(callback) {};
     virtual ~BasePiece() = 0;
-    virtual const MoveError move(const coord x, const coord y) = 0;
-    virtual void changeColor(bool isWhite) {m_isWhite = isWhite;}
-    virtual bool isWhite() {return m_isWhite;}
+    virtual const MoveError canMove(const coord x, const coord y) = 0;
+    virtual void changeColor(bool isWhite);
+    virtual const bool isWhite();
+    virtual void move(const coord x, coord y);
+    virtual const bool pieceOnWay(const coord x, const coord y) = 0;
 };
 
 #endif

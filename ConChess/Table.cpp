@@ -21,7 +21,8 @@ void Table::Reset()
                 std::cout << "Made " << piece << " at " << x + 1 << ' ' << y + 1 << std::endl;
                 #endif
             }
-            
+            else
+                m_table.g(x, y) = nullptr;
         }
     }
 }

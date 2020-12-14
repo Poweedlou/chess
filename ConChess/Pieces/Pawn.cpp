@@ -2,25 +2,33 @@
 #include "types.hpp"
 #include "errorcodes.hpp"
 
+#define PAWN_FORWARD (this->m_isWhite ? 1 : -1)
 
-const MoveError Pawn::getDoubleMove(const coord x, const coord y)
+
+const MoveError Pawn::canDoubleMove()
 {
     if (!(this->m_hasDoubleMove))
         return MoveError::NO_DOUBLE_MOVE;
-    if (m_x != x)
-        return MoveError::TRAVEL_ERROR;
-    if (y - m_y == ((this->m_isWhite) ? 2 : -2))
-    {
-        this->m_hasDoubleMove = false;
-        return MoveError::OK; 
-    }
-    else
-        return MoveError::TRAVEL_ERROR;
-    
+    return (this->pieceOnWay(m_x, m_y + 2 * PAWN_FORWARD) ? MoveError::TRAVEL_ERROR : MoveError::OK);
 }
 
-const MoveError Pawn::move(const coord x, const coord y)
+const MoveError Pawn::canMove(const coord x, const coord y)
 {
-    
+    if ((x == m_x) && (y - m_y == PAWN_FORWARD))
+        return MoveError::OK;
+    if ((abs(x - m_x) == 1) && (y - m_y == PAWN_FORWARD))
+        return (m_callback(x, y)) ? MoveError::OK : MoveError::CANT_EAT;
+    if ((x == m_x) && (y - m_y == PAWN_FORWARD * 2))
+    {
+        MoveError retval = this->canDoubleMove();
+        if (MoveError::OK == retval)
+            return (m_callback(x, y) ? MoveError::TRAVEL_ERROR : MoveError::OK);
+        return retval;
+    }
+    return MoveError::TRAVEL_ERROR;
 }
 
+const bool Pawn::pieceOnWay(const coord x, const coord y)
+{
+    return m_callback(m_x, m_y + PAWN_FORWARD);
+}
