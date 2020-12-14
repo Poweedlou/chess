@@ -13,7 +13,7 @@ typedef std::function<const bool(const coord, const coord)> t_callback;
 class BasePiece
 {
 protected:
-    static const PieceType m_type = PieceType::Base;
+    const PieceType m_type = PieceType::Base;
     coord m_x, m_y;
     bool m_isWhite;
     t_callback m_callback;
