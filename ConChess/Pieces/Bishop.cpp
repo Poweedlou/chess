@@ -1,6 +1,6 @@
 #include "Bishop.hpp"
 
-const bool Bishop::pieceOnWay(coord x, coord y)
+const bool Bishop::pieceOnWay(coord x, coord y) const
 {
     const coord dx = (x - m_x > 0) ? 1 : -1;
     const coord dy = (y - m_y > 0) ? 1 : -1;
@@ -14,7 +14,7 @@ const bool Bishop::pieceOnWay(coord x, coord y)
     return f;
 }
 
-const MoveError Bishop::canMove(const coord x, const coord y)
+const MoveError Bishop::canMove(const coord x, const coord y) const
 {
     coord dx = x - m_x;
     coord dy = x - m_y;

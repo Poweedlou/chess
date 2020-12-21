@@ -10,7 +10,8 @@ private:
     bool m_hasDoubleMove;
     const PieceType m_type = PieceType::Pawn;
 public:
-    const MoveError canDoubleMove();
-    const MoveError canMove(const coord x, const coord y) override; 
-    const bool pieceOnWay(const coord x, const coord y);
+    const MoveError canDoubleMove() const;
+    const MoveError canMove(const coord x, const coord y) const override; 
+    const bool pieceOnWay(const coord x, const coord y) const override;
+    void move(const coord x, const coord y) override;
 };

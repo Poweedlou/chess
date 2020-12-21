@@ -5,14 +5,14 @@
 #define PAWN_FORWARD (this->m_isWhite ? 1 : -1)
 
 
-const MoveError Pawn::canDoubleMove()
+const MoveError Pawn::canDoubleMove() const
 {
     if (!(this->m_hasDoubleMove))
         return MoveError::NO_DOUBLE_MOVE;
     return (this->pieceOnWay(m_x, m_y + 2 * PAWN_FORWARD) ? MoveError::TRAVEL_ERROR : MoveError::OK);
 }
 
-const MoveError Pawn::canMove(const coord x, const coord y)
+const MoveError Pawn::canMove(const coord x, const coord y) const
 {
     if ((x == m_x) && (y - m_y == PAWN_FORWARD))
         return MoveError::OK;
@@ -28,7 +28,7 @@ const MoveError Pawn::canMove(const coord x, const coord y)
     return MoveError::TRAVEL_ERROR;
 }
 
-const bool Pawn::pieceOnWay(const coord x, const coord y)
+const bool Pawn::pieceOnWay(const coord x, const coord y) const
 {
     return m_callback(m_x, m_y + PAWN_FORWARD);
 }
